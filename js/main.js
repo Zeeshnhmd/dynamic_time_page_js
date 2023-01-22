@@ -5,6 +5,9 @@ const time = document.getElementById('time'),
 	name = document.getElementById('name'),
 	focus = document.getElementById('focus');
 
+const addZero = (n) => {
+	return (parseInt(n, 10) < 10 ? '0' : '') + n;
+};
 // show time
 
 const showTime = () => {
@@ -20,9 +23,34 @@ const showTime = () => {
 	hour = hour % 12 || 12;
 
 	// output time
-	time.innerHTML = `${hour} : ${min} : ${sec} ${amPm}`;
+	time.innerHTML = `${hour}:${addZero(min)}:${addZero(sec)} ${amPm}`;
 
 	setTimeout(showTime, 1000);
 };
 
+// set Background and Greeting
+const setBgGreet = () => {
+	let today = new Date(),
+		hour = today.getHours();
+
+	if (hour < 12) {
+		// Morning
+		document.body.style.backgroundImage =
+			"url('https://i.ibb.co/7vDLJFb/morning.jpg')";
+		greeting.textContent = 'Good Morning';
+	} else if (hour < 18) {
+		// AfterNoon
+		document.body.style.backgroundImage =
+			"url('https://i.ibb.co/3mThcXc/afternoon.jpg')";
+		greeting.textContent = 'Good Afternoon';
+	} else {
+		// Evening
+		document.body.style.backgroundImage =
+			"url('https://i.ibb.co/924T2Wv/night.jpg')";
+		greeting.textContent = 'Good Evening';
+		document.body.style.color = '#fff';
+	}
+};
+
 showTime();
+setBgGreet();
